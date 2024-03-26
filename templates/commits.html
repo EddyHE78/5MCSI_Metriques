@@ -1,0 +1,43 @@
+<html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <canvas id="commitsChart" width="400" height="400"></canvas>
+
+    <script>
+        fetch('/commits/')
+            .then(response => response.json())
+            .then(data => {
+                const commitDates = data.map(commit => new Date(commit.commit.author.date));
+                const commitCount = commitDates.reduce((countMap, date) => {
+                    const minute = date.getMinutes();
+                    countMap[minute] = (countMap[minute] || 0) + 1;
+                    return countMap;
+                }, {});
+
+                const ctx = document.getElementById('commitsChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: Object.keys(commitCount),
+                        datasets: [{
+                            label: 'Commits par minute',
+                            data: Object.values(commitCount),
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            });
+    </script>
+</body>
+</html>
