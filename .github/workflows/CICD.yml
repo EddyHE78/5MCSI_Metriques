@@ -27,8 +27,8 @@ jobs:
             cd $HOME/www/
             git clone https://github.com/${{ github.repository }}.git
             # Vérifier si le répertoire de destination existe
-            if [ "$(ls -A ./flask7)" ]; then
-              rsync -r ./$last_directory/ ./flask7
+            if [ "$(ls -A ./flask8)" ]; then
+              rsync -r ./$last_directory/ ./flask8
               rm -rf ./$last_directory
             else
               echo "Le répertoire flask de destination sur votre serveur n'existe pas"
