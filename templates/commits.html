@@ -10,8 +10,10 @@
             font-family: Arial, sans-serif;
         }
         table {
-            width: 100%;
+            width: 50%;
             border-collapse: collapse;
+            float: left;
+            margin-right: 20px;
         }
         th, td {
             border: 1px solid #ddd;
@@ -21,22 +23,28 @@
         th {
             background-color: #f2f2f2;
         }
+        canvas {
+            float: left;
+            width: 50%;
+        }
     </style>
 </head>
 <body>
     <h1>Informations sur les commits</h1>
-    <table id="commit-table">
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Minute</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Les lignes seront ajoutées ici par jQuery -->
-        </tbody>
-    </table>
-    <canvas id="commitsChart"></canvas>
+    <div style="overflow: auto;">
+        <table id="commit-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Minute</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Les lignes seront ajoutées ici par jQuery -->
+            </tbody>
+        </table>
+        <canvas id="commitsChart"></canvas>
+    </div>
 
     <script>
         $(document).ready(async function() {
