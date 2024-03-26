@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Évolution des températures de Tawarano</title>
+  <title>Évolution des températures de Tawarano | HE Eddy</title>
   <!-- Charger la bibliothèque Google Charts -->
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
@@ -27,7 +27,8 @@
         hAxis: { title: 'Année' },
         colors: ['#3366CC'], // Couleur des colonnes
         chartArea: { width: '80%', height: '70%' }, // Ajuster la taille de la zone de tracé
-        bar: { groupWidth: '50%' } // Ajuster la largeur des colonnes
+        bar: { groupWidth: '50%' }, // Ajuster la largeur des colonnes
+        backgroundColor: '#f0f0f0' // Fond de couleur
       };
 
       var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
@@ -35,7 +36,7 @@
     }
   </script>
 </head>
-<body>
+<body style="background-color: #f9f9f9;"> <!-- Fond de couleur pour le corps de la page -->
   <!-- Div où le graphique sera affiché -->
   <div id="chart_div" style="width: 100%; height: 500px;"></div>
 </body>
