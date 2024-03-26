@@ -39,6 +39,15 @@ def monhistogramme():
 @app.route("/commits/")
 def moncommits():
     return render_template("commits.html")
+
+@app.route('/commits/')
+def get_commits_data():
+    repo_owner = "EddyHE78"  # Remplacez ceci par votre nom d'utilisateur GitHub
+    repo_name = "5MCSI_Metriques"
+    api_url = f"https://api.github.com/repos/{repo_owner}/{repo_name}/commits"
+    response = requests.get(api_url)
+    commits_data = response.json()
+    return jsonify(commits_data)
   
 if __name__ == "__main__":
   app.run(debug=True)
