@@ -8,30 +8,50 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
         }
-        table {
-            width: 50%;
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #commit-table {
+            width: 80%;
             border-collapse: collapse;
-            float: left;
-            margin-right: 20px;
+            margin-bottom: 20px;
         }
-        th, td {
+        #commit-table th, #commit-table td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
         }
-        th {
+        #commit-table th {
             background-color: #f2f2f2;
         }
         canvas {
-            float: left;
-            width: 50%;
+            width: 80%;
+            max-width: 600px;
         }
     </style>
 </head>
 <body>
-    <h1>Informations sur les commits</h1>
-    <div style="overflow: auto;">
+    <div class="container">
+        <h1 class="header">Informations sur les commits</h1>
         <table id="commit-table">
             <thead>
                 <tr>
