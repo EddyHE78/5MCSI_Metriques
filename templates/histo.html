@@ -1,37 +1,41 @@
 <html>
   <head>
+    <meta charset="UTF-8" />
+    <title>Metrique</title>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load("current", {packages:["corechart"]});
-      google.charts.setOnLoadCallback(drawChart);
-      function drawChart() {
-        // Récupérer les données depuis l'API OpenWeatherMap
-        fetch('https://samples.openweathermap.org/data/2.5/forecast?lat=0&lon=0')
-          .then(response => response.json())
-          .then(data => {
-            // Extraire les températures
-            const temperatures = data.list.map(entry => entry.main.temp);
-
-            // Créer un histogramme
-            var histogramData = new google.visualization.DataTable();
-            histogramData.addColumn('string', 'Temps');
-            histogramData.addColumn('number', 'Température');
-            histogramData.addRows(temperatures.map(temp => [temp.toString(), temp]));
-
-            var options = {
-              title: 'Histogramme des températures',
-              legend: { position: 'none' },
-              hAxis: { title: 'Température (°C)' },
-              vAxis: { title: 'Fréquence' }
-            };
-
-            var chart = new google.visualization.Histogram(document.getElementById('chart_div'));
-            chart.draw(histogramData, options);
-          });
-      }
-    </script>
   </head>
   <body>
-    <div id="chart_div" style="width: 900px; height: 500px;"></div>
+    <div id="chart_div"></div>
+    <script>
+      google.charts.load('current', { packages: ['corechart'] });
+      google.charts.setOnLoadCallback(drawBackgroundColor);
+     function drawBackgroundColor() {
+      function drawChart(data) {
+        // Convertir les données récupérées en un tableau utilisable par Google Charts
+        var dataTable = new google.visualization.DataTable();
+        dataTable.addColumn('string', 'Temps');
+        dataTable.addColumn('number', 'Température');
+        data.list.forEach(entry => {
+          var time = new Date(entry.dt * 1000);
+          dataTable.addRow([time.toLocaleTimeString(), entry.main.temp]);
+        });
+        // Configurer les options de l'histogramme
+        var options = {
+          title: 'Évolution des températures',
+          legend: { position: 'bottom' },
+          hAxis: { title: 'Temps' },
+          vAxis: { title: 'Température (°C)' }
+        };
+        var chart = new google.visualization.Histogram(document.getElementById('chart_div'));
+        chart.draw(dataTable, options);
+      }
+      // Récupération de données depuis l'API OpenWeatherMap
+      fetch('https://samples.openweathermap.org/data/2.5/forecast?lat=0&lon=0')
+        .then(response => response.json())
+        .then(data => {
+          drawChart(data);
+        });
+    }
+    </script>
   </body>
 </html>
