@@ -6,7 +6,7 @@
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
         // Récupérer les données depuis l'API OpenWeatherMap
-        fetch('https://samples.openweathermap.org/data/2.5/forecast?lat=0&lon=0&appid=xxx')
+        fetch('https://samples.openweathermap.org/data/2.5/forecast?lat=0&lon=0')
           .then(response => response.json())
           .then(data => {
             // Extraire les températures
