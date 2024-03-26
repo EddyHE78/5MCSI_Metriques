@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,62 +7,106 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
+            background-color: #f8f9fa;
             margin: 0;
             padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
         .container {
-            width: 50%;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #fff;
+            background-color: #ffffff;
+            padding: 40px;
             border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 400px;
         }
         h1 {
             text-align: center;
-            color: #007bff;
+            color: #333333;
         }
-        form {
-            margin-top: 20px;
-        }
-        input[type="text"],
-        textarea {
+        input[type="text"], textarea {
             width: 100%;
-            padding: 10px;
-            margin-top: 10px;
-            margin-bottom: 20px;
+            padding: 12px;
+            margin: 10px 0;
+            box-sizing: border-box;
             border: 1px solid #ccc;
             border-radius: 5px;
-            box-sizing: border-box;
             font-size: 16px;
+        }
+        textarea {
+            height: 150px;
         }
         input[type="submit"] {
             background-color: #007bff;
-            color: #fff;
-            border: none;
+            color: white;
             padding: 15px 20px;
-            cursor: pointer;
+            margin: 10px 0;
+            border: none;
             border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
             font-size: 16px;
+            transition: background-color 0.3s;
         }
         input[type="submit"]:hover {
             background-color: #0056b3;
         }
+        input[type="submit"]:focus {
+            outline: none;
+        }
+        .required::before {
+            content: "* ";
+            color: #ff0000;
+        }
+        .required {
+            color: #ff0000;
+        }
+        .error {
+            color: #ff0000;
+            font-size: 14px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
+    <div class="container">
+        <h1>Formulaire de Contact</h1>
+        <form id="contactForm" action="#" method="post">
+            <label for="fname" class="required">Prénom</label>
+            <input type="text" id="fname" name="firstname" placeholder="Votre prénom.." required>
+        
+            <label for="lname" class="required">Nom</label>
+            <input type="text" id="lname" name="lastname" placeholder="Votre nom.." required>
+        
+            <label for="email" class="required">Email</label>
+            <input type="text" id="email" name="email" placeholder="Votre email.." required>
+        
+            <label for="message" class="required">Message</label>
+            <textarea id="message" name="message" placeholder="Ecrivez votre message ici.." required></textarea>
+        
+            <input type="submit" value="Envoyer">
+        </form>
+    </div>
 
-<div class="container">
-    <h1>Formulaire de Contact</h1>
-    <form action="#" method="post">
-        <input type="text" name="prenom" placeholder="Votre Prénom">
-        <input type="text" name="nom" placeholder="Votre Nom">
-        <textarea name="message" placeholder="Votre Message"></textarea>
-        <input type="submit" value="Envoyer">
-    </form>
-</div>
-
+    <script>
+        document.getElementById("contactForm").addEventListener("submit", function(event) {
+            var isValid = true;
+            var formInputs = this.querySelectorAll("[required]");
+            formInputs.forEach(function(input) {
+                if (!input.checkValidity()) {
+                    isValid = false;
+                    input.classList.add("error");
+                } else {
+                    input.classList.remove("error");
+                }
+            });
+            if (!isValid) {
+                event.preventDefault();
+            }
+        });
+    </script>
 </body>
 </html>
